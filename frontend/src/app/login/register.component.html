@@ -26,7 +26,7 @@
                     </div>
                 </div>
 
-                <div class="form-group" *ngIf="forma.error?.sonIguales && !forma.pristine">
+                <div class="form-group" *ngIf="forma.errors?.sonIguales && !forma.pristine">
                     <p class="text-danger">
                         The password is not the same.
                     </p>

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Usuario } from '../../models/usuario.model';
 import { URL_SERVICES } from '../../config/config';
-import * as swal from 'sweetalert';
+//import  { wal } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { Router } from '@angular/router';
 
@@ -48,7 +48,7 @@ export class UsuarioService {
     const url = URL_SERVICES + '/users';
     return this.http.post( url, usuario)
     .map((resp: any) => {
-      swal('User Created', usuario.email, 'success');
+      //swal('User Created', usuario.email, 'success');
       return resp.usuario;
     });
   }

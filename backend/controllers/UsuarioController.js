@@ -13,7 +13,11 @@ var UsuarioController = {
         Usuario.find({}, 'name email img role')
             .skip(desde)
             .limit(3)
-            .then(users => res.send(users))
+            .then(users => res.send({
+                usuario: users,
+                total: 20
+            }))
+
     },
 
     update: (req, res) => {
