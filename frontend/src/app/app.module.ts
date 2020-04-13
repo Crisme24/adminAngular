@@ -13,8 +13,6 @@ import { RegisterComponent } from './login/register.component';
 import { SettingsService } from './services/settings/settings.service';
 import { HttpClientModule } from '@angular/common/http';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,

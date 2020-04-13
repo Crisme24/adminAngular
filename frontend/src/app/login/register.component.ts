@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormsModule } from '@angular/forms';
-//import * as swal from 'sweetalert';
 import { UsuarioService } from '../services/usuario/usuario.service';
 import { Usuario } from '../models/usuario.model';
 import { Router } from '@angular/router';
- 
+import swal from 'sweetalert2';
+
 declare function init_plugins();
 
 @Component({
@@ -58,7 +58,7 @@ export class RegisterComponent implements OnInit {
     }
     if (!this.forma.value.condiciones){
 
-       //swal('Important', 'You need to accept the conditions', 'warning');
+       swal.fire('Important', 'You need to accept the conditions', 'warning');
       // tslint:disable-next-line: align
       return;
     }

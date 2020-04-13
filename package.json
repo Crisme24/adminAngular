@@ -1,30 +1,33 @@
 {
-  "name": "adminpro",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "start": "concurrently \"npm run start:front\" \"npm run start:back\" ",
-    "start:back": "cd backend && nodemon index.js",
-    "start:front": "cd frontend && ng serve --open",
-    "install:back": "cd backend && npm install",
-    "install:front": "cd frontend && npm install",
-    "postinstall": "concurrently \"npm run install:front\" \"npm run install:back\" "
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Crisme24/adminAngular.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Crisme24/adminAngular/issues"
-  },
-  "homepage": "https://github.com/Crisme24/adminAngular#readme",
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "jsonwebtoken": "^8.5.1"
-  },
-  "devDependencies": {},
-  "description": ""
+    "name": "adminpro",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "start": "concurrently \"npm run start:front\" \"npm run start:back\" ",
+        "start:back": "cd backend && nodemon index.js",
+        "start:front": "cd frontend && ng serve --open",
+        "install:back": "cd backend && npm install",
+        "install:front": "cd frontend && npm install",
+        "postinstall": "concurrently \"npm run install:front\" \"npm run install:back\" "
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Crisme24/adminAngular.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Crisme24/adminAngular/issues"
+    },
+    "homepage": "https://github.com/Crisme24/adminAngular#readme",
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "google-auth-library": "^0.12.0",
+        "jsonwebtoken": "^8.5.1"
+    },
+    "devDependencies": {
+        "lite-server": "^2.5.4"
+    },
+    "description": ""
 }

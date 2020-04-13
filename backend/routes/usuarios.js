@@ -8,6 +8,7 @@ router.post('/', UsuarioController.store);
 router.put('/:id', mdAutenticacion.verificaToken, UsuarioController.update);
 router.delete('/:id', mdAutenticacion.verificaToken, UsuarioController.delete);
 router.post('/login', UsuarioController.login);
+router.post('/google', UsuarioController.google);
 
 
 module.exports = router;

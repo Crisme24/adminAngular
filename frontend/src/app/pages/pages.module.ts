@@ -14,32 +14,45 @@ import { GraficoDonaComponent } from '../components/grafico-dona/grafico-dona.co
 import { AccountSettingComponent } from './account-setting/account-setting.component';
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
-
-
+import { PipesModule } from '../pipes/pipes.module';
+import { ProfileComponent } from './profile/profile.component';
+import { CommonModule } from '@angular/common';
+import { UsersComponent } from './users/users.component';
+import { ModalUploadComponent } from '../components/modal-upload/modal-upload.component';
+import { HospitalesComponent } from './hospitales/hospitales.component';
+import { MedicosComponent } from './medicos/medicos.component';
+import { MedicoComponent } from './medicos/medico.component';
 
 @NgModule({
     declarations: [
-      PagesComponent,
-      DashboardComponent,
-      ProgressComponent,
-      Graficas1Component,
-      IncrementadorComponent,
-      GraficoDonaComponent,
       AccountSettingComponent,
+      DashboardComponent,
+      Graficas1Component,
+      GraficoDonaComponent,
+      IncrementadorComponent,
+      ModalUploadComponent,
+      PagesComponent,
+      ProfileComponent,
+      ProgressComponent,
       PromesasComponent,
-      RxjsComponent
+      RxjsComponent,
+      UsersComponent,
+      HospitalesComponent,
+      MedicosComponent,
+      MedicoComponent
     ],
     exports: [
         DashboardComponent,
-        ProgressComponent,
         Graficas1Component,
-        IncrementadorComponent
+        ProgressComponent
       ],
     imports: [
-        SharedModule,
-        PAGES_ROUTES,
-        FormsModule,
-        ChartsModule
+      CommonModule,
+      SharedModule,
+      PAGES_ROUTES,
+      FormsModule,
+      ChartsModule,
+      PipesModule
     ]
   })
   export class PagesModule { }

@@ -4,10 +4,62 @@ var Medico = require('../models/medico');
 var MedicoController = {
 
     get: (req, res) => {
-        Medico.find({})
+
+        var desde = req.query.desde || 0;
+        desde = Number(desde);
+
+        Medico.find({}, 'name img email')
             .populate('usuario', 'name email')
             .populate('hospital')
-            .then(medicos => res.send(medicos))
+            .skip(desde)
+            .limit(5)
+            .exec(
+                (err, medicos) => {
+                    if (err) {
+                        return res.status(500).json({
+                            ok: false,
+                            message: 'Error loading doctors',
+                            errors: err
+                        });
+                    }
+                    Medico.count({}, (err, conteo) => {
+                        res.status(200).json({
+                            ok: true,
+                            medicos: medicos,
+                            total: conteo
+                        });
+                    });
+                }
+            );
+    },
+
+    getOne: (req, res) => {
+
+        var id = req.params.id;
+
+        Medico.findById(id)
+            .populate('usuario', 'name email, img')
+            .populate('hospital')
+            .exec((err, medico) => {
+                if (err) {
+                    return res.status(500).json({
+                        ok: false,
+                        message: 'Can not show the doctor try later',
+                        errors: err
+                    });
+                }
+                if (!medico) {
+                    return res.status(400).json({
+                        ok: false,
+                        message: 'The doctor with the id: ' + id + 'do not exists'
+                    });
+                }
+
+                return res.status(200).json({
+                    ok: true,
+                    medico: medico
+                });
+            });
     },
 
     update: (req, res) => {
@@ -49,7 +101,7 @@ var MedicoController = {
 
                 res.status(200).json({
                     ok: true,
-                    doctor: medicoGuardado
+                    medico: medicoGuardado
                 });
             });
         });
@@ -78,7 +130,7 @@ var MedicoController = {
 
             res.status(201).json({
                 ok: true,
-                doctor: medicoGuardado
+                medico: medicoGuardado
             });
         });
     },
@@ -99,7 +151,7 @@ var MedicoController = {
 
             res.status(200).json({
                 ok: true,
-                doctor: medicoBorrado
+                medico: medicoBorrado
             });
         });
     },
