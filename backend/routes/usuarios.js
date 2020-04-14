@@ -5,8 +5,10 @@ var mdAutenticacion = require('../middlewares/authentication');
 
 router.get('/', UsuarioController.get);
 router.post('/', UsuarioController.store);
-router.put('/:id', mdAutenticacion.verificaToken, UsuarioController.update);
-router.delete('/:id', mdAutenticacion.verificaToken, UsuarioController.delete);
+router.put('/:id', [mdAutenticacion.verificaToken, mdAutenticacion.verifica_Id_Role],
+    UsuarioController.update);
+router.delete('/:id', [mdAutenticacion.verificaToken, mdAutenticacion.verificaADMIN],
+    UsuarioController.delete);
 router.post('/login', UsuarioController.login);
 router.post('/google', UsuarioController.google);
 

@@ -5,6 +5,8 @@ import { UsuarioService } from '../usuario/usuario.service';
 import { HospitalService } from '../hospital/hospital.service';
 import { Medico } from '../../models/medico.model';
 import swal from 'sweetalert2';
+import { map, filter, catchError, mergeMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +28,7 @@ export class MedicoService {
   cargarMedico( id: string ) {
     const url = URL_SERVICES + '/medicos/' + id;
     return this.http.get(url)
-    .map( (resp: any) => resp.medico );
+    .pipe(map( (resp: any) => resp.medico ));
   }
 
   guardarMedico( medico: Medico ) {
@@ -39,35 +41,35 @@ export class MedicoService {
       url += '?token=' + this.usuarioService.token;
 
       return this.http.put( url, medico)
-      .map( (resp: any) => {
+      .pipe(map( (resp: any) => {
         swal.fire('Updated doctor', medico.name, 'success');
         return resp.medico;
-      });
+      }));
     }else{
 
       url += '?token=' + this.usuarioService.token;
 
       return this.http.post( url, medico )
-      .map( (resp: any) => {
+      .pipe(map( (resp: any) => {
         swal.fire('Created doctor', medico.name, 'success');
         return resp.medico;
-    });
+    }));
     }
   }
 
   buscarMedico( termino: string ){
     const url = URL_SERVICES + '/busqueda/coleccion/medicos/' + termino;
     return this.http.get( url )
-      .map( (resp: any) => resp.medicos);
+      .pipe(map( (resp: any) => resp.medicos));
   }
 
   borrarMedico( id: string ) {
     let url = URL_SERVICES + '/medicos/' + id;
     url += '?token=' + this.usuarioService.token;
     return this.http.delete(url)
-      .map( resp => {
+      .pipe(map( resp => {
         swal.fire('Deleted doctor', 'Doctor was successfully removed', 'success');
         return resp;
-      });
+      }));
   }
 }

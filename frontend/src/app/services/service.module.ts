@@ -11,6 +11,7 @@ import { UploadFilesService } from './upload/upload-files.service';
 import { ModalUploadService } from '../components/modal-upload/modal-upload.service';
 import { HospitalService } from './hospital/hospital.service';
 import { MedicoService } from './medico/medico.service';
+import { AdminGuard } from './guards/admin.guard';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { MedicoService } from './medico/medico.service';
     HttpClientModule
   ],
   providers: [
+    AdminGuard,
     HospitalService,
     LoginGuardGuard,
     MedicoService,

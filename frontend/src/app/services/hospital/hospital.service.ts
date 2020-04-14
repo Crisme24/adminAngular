@@ -4,6 +4,8 @@ import { URL_SERVICES } from '../../config/config';
 import { UsuarioService } from '../usuario/usuario.service';
 import swal from 'sweetalert2';
 import { Hospital } from '../../models/hospital.model';
+import { map, filter, catchError, mergeMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -24,16 +26,16 @@ export class HospitalService {
   cargarHospitalxMedico() {
     const url = URL_SERVICES + '/hospitales';
     return this.http.get( url )
-    .map( (resp: any) => {
+    .pipe(map( (resp: any) => {
       this.totalRegistros = resp.total;
       return resp.hospitales;
-    });
+    }));
   }
 
   obtenerHospitales( id: string ) {
     const url = URL_SERVICES + '/hospitales/' + id;
     return this.http.get( url)
-    .map(( resp: any) => resp.hospital);
+    .pipe(map(( resp: any) => resp.hospital));
   }
 
   eliminarHospital( id: string ) {
@@ -41,7 +43,7 @@ export class HospitalService {
     url += '?token=' + this.usuarioService.token;
 
     return this.http.delete( url)
-    .map( resp => swal.fire('Deleted hospital', 'Hospital successfully removed', 'success'));
+    .pipe(map( resp => swal.fire('Deleted hospital', 'Hospital successfully removed', 'success')));
   }
 
   crearHospital( name: string ) {
@@ -49,23 +51,23 @@ export class HospitalService {
     url += '?token=' + this.usuarioService.token;
 
     return this.http.post( url, {name})
-    .map( (resp: any) => resp.hospital );
+    .pipe(map( (resp: any) => resp.hospital ));
   }
 
   buscarHospital( termino: string ) {
     const url = URL_SERVICES + '/busqueda/coleccion/hospitales/' + termino;
     return this.http.get( url )
-            .map( (resp: any) => resp.hospitales);
+            .pipe(map( (resp: any) => resp.hospitales));
   }
 
   actualizarHospital( hospital: Hospital ) {
     let url = URL_SERVICES + '/hospitales/' + hospital._id;
     url += '?token=' + this.usuarioService.token;
     return this.http.put(url, hospital)
-          .map( (resp: any) => {
+          .pipe(map( (resp: any) => {
             swal.fire('Updated Hospital', hospital.name, 'success');
             return resp.hospital;
-          });
+          }));
   }
 
 }

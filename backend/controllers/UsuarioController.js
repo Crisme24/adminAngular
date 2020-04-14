@@ -69,7 +69,7 @@ var UsuarioController = {
                 if (err) {
                     return res.status(400).json({
                         ok: false,
-                        message: 'Error when trying to updated the user',
+                        message: 'Update failed',
                         errors: err
                     });
                 }
@@ -100,7 +100,7 @@ var UsuarioController = {
             if (err) {
                 return res.status(400).json({
                     ok: false,
-                    message: 'Error when trying to create the user',
+                    message: 'Sign up failed',
                     errors: err
                 });
             }
@@ -176,7 +176,8 @@ var UsuarioController = {
                 ok: true,
                 usuario: usuarioDB,
                 token: token,
-                id: usuarioDB._id
+                id: usuarioDB._id,
+                menu: obtenerMenu(usuarioDB.role)
             });
         });
     },
@@ -226,7 +227,8 @@ var UsuarioController = {
                             ok: true,
                             usuario: usuarioDB,
                             token: token,
-                            id: usuarioDB._id
+                            id: usuarioDB._id,
+                            menu: obtenerMenu(usuarioDB.role)
                         });
                     }
                 } else {
@@ -246,7 +248,8 @@ var UsuarioController = {
                             ok: true,
                             usuario: usuarioDB,
                             token: token,
-                            id: usuarioDB._id
+                            id: usuarioDB._id,
+                            menu: obtenerMenu(usuarioDB.role)
                         });
                     });
                 }
@@ -259,20 +262,21 @@ var UsuarioController = {
             // });
         }
     },
-}
+};
 
 //=======================================
 //Funcion para verificar el token de Google
 //=======================================
 
 async function verify(token) {
-    const ticket = await client.verifyIdToken({
+    var ticket = await client.verifyIdToken({
         idToken: token,
         audience: CLIENT_ID, // Specify the CLIENT_ID of the app that accesses the backend
         // Or, if multiple clients access the backend:
         //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
     });
-    const payload = ticket.getPayload();
+
+    var payload = ticket.getPayload();
     //const userid = payload['sub'];
     // If request specified a G Suite domain:
     //const domain = payload['hd'];
@@ -282,6 +286,38 @@ async function verify(token) {
         img: payload.picture,
         google: true
     }
+}
+
+
+function obtenerMenu(role) {
+
+    var menu = [{
+            titulo: 'Principal',
+            icono: 'mdi mdi-gauge',
+            submenu: [
+                { titulo: 'Dashboard', url: '/dashboard' },
+                { titulo: 'ProgressBar', url: '/progress' },
+                { titulo: 'Graphics', url: '/graficas1' },
+                //{ titulo: 'Promises', url: '/promesas'},
+            ]
+        },
+        {
+            titulo: 'Maintenance',
+            icono: 'mdi mdi-folder-lock-open',
+            submenu: [
+                //{ titulo: 'Users', url: '/users' },
+                { titulo: 'Hospitals', url: '/hospitals' },
+                { titulo: 'Doctors', url: '/doctors' },
+            ]
+        },
+    ];
+
+    if (role === 'ADMIN') {
+
+        menu[1].submenu.unshift({ titulo: 'Users', url: '/users' });
+    }
+
+    return menu;
 }
 
 module.exports = UsuarioController;

@@ -37,6 +37,7 @@ Login register and recover password Page
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center center;
+    background-size: 100%;
     height: 100%;
     width: 100%;
     position: fixed;
