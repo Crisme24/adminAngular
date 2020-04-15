@@ -4,7 +4,7 @@ import { PAGES_ROUTES } from './pages.routes';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
-import { PagesComponent } from './pages.component';
+//import { PagesComponent } from './pages.component';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
@@ -18,7 +18,7 @@ import { PipesModule } from '../pipes/pipes.module';
 import { ProfileComponent } from './profile/profile.component';
 import { CommonModule } from '@angular/common';
 import { UsersComponent } from './users/users.component';
-import { ModalUploadComponent } from '../components/modal-upload/modal-upload.component';
+//import { ModalUploadComponent } from '../components/modal-upload/modal-upload.component';
 import { HospitalesComponent } from './hospitales/hospitales.component';
 import { MedicosComponent } from './medicos/medicos.component';
 import { MedicoComponent } from './medicos/medico.component';
@@ -31,8 +31,8 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
       Graficas1Component,
       GraficoDonaComponent,
       IncrementadorComponent,
-      ModalUploadComponent,
-      PagesComponent,
+      //ModalUploadComponent,
+      //PagesComponent,
       ProfileComponent,
       ProgressComponent,
       PromesasComponent,

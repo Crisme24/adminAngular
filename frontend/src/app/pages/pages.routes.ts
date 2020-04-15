@@ -14,15 +14,16 @@ import { MedicosComponent } from './medicos/medicos.component';
 import { MedicoComponent } from './medicos/medico.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
 import { AdminGuard } from '../services/guards/admin.guard';
+import { VerificaTokenGuard } from '../services/guards/verifica-token.guard';
 
 
 const pagesRoutes: Routes = [
-    {
-      path: '',
-      component: PagesComponent,
-      canActivate: [LoginGuardGuard],
-      children: [
-        { path: 'dashboard', component: DashboardComponent, data: { titulo: 'Dashboard'}},
+        {
+          path: 'dashboard',
+          component: DashboardComponent,
+          canActivate: [ VerificaTokenGuard ],
+          data: { titulo: 'Dashboard'}
+        },
         { path: 'profile', component: ProfileComponent, data: { titulo: 'User Profile'}},
         { path: 'progress', component: ProgressComponent, data: { titulo: 'Progress'}},
         { path: 'graficas1', component: Graficas1Component, data: { titulo: 'Graphics'}},
@@ -30,7 +31,7 @@ const pagesRoutes: Routes = [
         { path: 'account-setting', component: AccountSettingComponent, data: { titulo: 'Settings'}},
         { path: 'search/:termino', component: BusquedaComponent, data: { titulo: 'Search'}},
         //Mantenimientos
-        { 
+        {
           path: 'users',
           component: UsersComponent,
           canActivate: [ AdminGuard],
@@ -40,8 +41,6 @@ const pagesRoutes: Routes = [
         { path: 'doctors', component: MedicosComponent, data: { titulo: 'Doctors maintenance'}},
         { path: 'doctor/:id', component: MedicoComponent, data: { titulo: 'Doctor information'}},
         { path: '', redirectTo: '/dashboard', pathMatch: 'full'},
-      ]
-    }
 
   ];
 

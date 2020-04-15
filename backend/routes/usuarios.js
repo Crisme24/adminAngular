@@ -11,6 +11,7 @@ router.delete('/:id', [mdAutenticacion.verificaToken, mdAutenticacion.verificaAD
     UsuarioController.delete);
 router.post('/login', UsuarioController.login);
 router.post('/google', UsuarioController.google);
+router.get('/token', mdAutenticacion.verificaToken, UsuarioController.renovateToken);
 
 
 module.exports = router;
