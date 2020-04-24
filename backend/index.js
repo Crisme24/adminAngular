@@ -44,7 +44,11 @@ app.use('/busqueda', busquedaRoutes);
 app.use('/upload', uploadRoutes);
 app.use('/img', imagenesRoutes);
 
-mongoose.connection.openUri('mongodb://localhost:27017/hospitalDB', { useNewUrlParser: true }, (err, res) => {
+mongoose.connection.openUri('mongodb://localhost:27017/hospitalDB', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true
+}, (err, res) => {
     if (err) throw err;
     console.log('DB running on port ' + PORTDB + ' ' + '\x1b[36m%s\x1b[0m', 'online');
 });
